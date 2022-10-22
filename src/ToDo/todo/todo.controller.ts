@@ -1,5 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { createToDo, updateToDo } from '../DTO/ToDo.dto';
+import { createToDo, updateToDo } from '../../shared/DTO/ToDo.dto';
+import { SkillsPipe } from './skills.pipe';
 import { TodoService } from './todo.service';
 
 @Controller('todo')
@@ -12,6 +13,10 @@ export class TodoController {
     @Get('/:id')
     async getToDoById(@Param('id') id:string){
         return this.service.getToDoById(id)
+    }
+    @Post('skills')
+    async transfTable(@Body(SkillsPipe) out){
+      return out  
     }
     @Post('')
     async createTODO(@Body() data:createToDo){
